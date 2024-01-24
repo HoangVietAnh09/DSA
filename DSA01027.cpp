@@ -1,26 +1,21 @@
 #include <bits/stdc++.h>
 using namespace std;
-int n, ok;
-vector<pair<int, int>> vp;
-bool cmp(pair<int, int> a, pair<int, int> b){
-    return a.first < b.first;
-}
-
-void sinh(){
-    int i = n-2;
-    while(i >= 0 && vp[i].second > vp[i+1].second){
-        i--;
+int n, used[1004], a[1004];
+vector<int> v;
+void in(){
+    for(int i = 1; i <= n; i++){
+        cout << v[a[i]] << " ";
     }
-    if(i == -1){
-       ok = 0;
-    }else{
-        int j = n-1;
-        while(vp[i].second > vp[j].second) j--;
-        swap(vp[i].second, vp[j].second);
-        int l = i+1, r = n-1;
-        while(l < r){
-            swap(vp[l].second, vp[r].second);
-            l++, r--;
+    cout << endl;
+}
+void backTrack(int i){
+    for(int j = 1; j <= n; j++){
+        if(used[j] == 0){
+            used[j] = 1;
+            a[i] = j;
+            if(i == n) in();
+            else backTrack(i+1);
+            used[j] = 0;
         }
     }
 }
@@ -28,20 +23,14 @@ int main(){
     ios_base::sync_with_stdio(0);
     cin.tie(0), cout.tie(0);
     cin >> n;
-    vp.resize(n);
+    set<int> s;
     for(int i = 0; i < n; i++){
-        cin >> vp[i].first;
-        vp[i].second = i+1;
+        int x;
+        cin >> x;
+        s.insert(x);
     }
-    sort(vp.begin(), vp.end(), cmp);
-    ok = 1;
-    while(ok){
-        for(int i = 0; i < n; i++){
-            cout << vp[i].first;
-        }
-        sinh();
-        cout << endl;
-    }
-
+    v.push_back(-1);
+    for(int x : s) v.push_back(x);
+    backTrack(1);
     return 0;
 }
