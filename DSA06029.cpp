@@ -5,9 +5,10 @@ int main(){
     cin.tie(0);
     int n;
     cin >> n;
-    int a[n];
+    vector<int> a(n);
+    vector<vector<int>> b; 
     for(int i = 0; i < n; i++) cin >> a[i];
-    for(int i = 1; i < n; i++){
+    for(int i = 0; i < n; i++){
         int key = a[i];
         int j = i-1;
         while(j >= 0 && a[j] > key){
@@ -15,8 +16,13 @@ int main(){
             j--;
         }
         a[j+1] = key;
-        cout << "Buoc " << i-1 << ": ";
-        for(int j = 0; j <= i; j++) cout << a[j] << " ";
+        vector<int> tmp(a.begin(), a.begin()+i + 1);
+        b.push_back(tmp);
+
+    }
+    for(int i = b.size()-1; i >= 0; i--){
+        cout << "Buoc " << i << ": ";
+        for(int j = 0; j < b[i].size(); j++) cout << b[i][j] << " ";
         cout << endl;
     }
     return 0;
