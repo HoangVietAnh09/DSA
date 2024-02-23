@@ -1,36 +1,44 @@
 #include <bits/stdc++.h>
 using namespace std;
-vector<int> v;
-
+int n, k, a[10004], ok, l;
+set<int> s;
+void khoiTao(){
+	for(int i = 0; i < n; i++){
+		int x;
+		cin >> x;
+		s.insert(x);
+	}
+	l = s.size();
+}
+void sinh(){
+	int i = k;
+	while(a[i] == l-k+i){
+		i--;
+	}
+	if(i == 0) ok = 0;
+	else{
+		a[i]++;
+		for(int j = i+1; j <= k; j++){
+			a[j] = a[j-1]+1;
+		}
+	}
+}
 int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    int n, k;
-    bool check = true;
-    cin >> n >> k;
-    set<int> s;
-    for(int i = 0; i < n; i++){
-        int x; cin >> x;
-        s.insert(x);
-    }
-    v.push_back(-1);
-    for(int x : s) v.push_back(x);
-    vector<int> res(v.begin(), v.begin()+k);
-    int l = v.size()-1;
-    while(check){
-        for(int i = 0; i < k; i++) cout << res[i] << " ";
-        int i = k-1;
-        while(i >= 0 && res[i] == l-k+i+1){
-            i--;
-        }
-        if(i == -1) check = false;
-        else{
-            res[i]++;
-            for(int j = i + 1; j < k; j++){
-                res[j] = res[j-1]+1;
-            }
-        }
-        cout << endl;
-    }
+	cin >> n >> k;
+	khoiTao();
+	
+	vector<int> v;
+	v.push_back(-1);
+	for(int x : s){
+		v.push_back(x);
+	}
+	for(int i = 1; i <= l; i++) a[i] = i;
+	ok = 1;
+	while(ok){
+		for(int i = 1; i <= k; i++) cout << v[a[i]] << " ";
+		cout << endl;
+		sinh();
+	}
+
     return 0;
 }
