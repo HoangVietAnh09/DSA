@@ -1,5 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
+<<<<<<< HEAD
+int main(){
+    int n, k;
+    cin >> n >> k;
+    set<string> s;
+    for(int i = 0; i < n; i++){
+        string a;
+        cin >> a;
+        s.insert(a);
+    }
+    vector<string> v(s.begin(), s.end());
+    vector<pair<string, int>> vp;
+    vp.resize(v.size());
+    for(int i = 0; i < v.size(); i++){
+        vp[i].first = v[i];
+        vp[i].second = i;
+    }
+    for(int i = 0; i < vp.size(); i++){
+        cout << vp[i].first << " " << vp[i].second << endl;
+    }
+
+=======
 int n, k, a[10004];
 vector<string> v;
 void in(){
@@ -30,5 +52,6 @@ int main(){
     for(string x : s) v.push_back(x);
     a[0] = 0;
     backTrack(1);
+>>>>>>> 590bf36d269ab37c6884aca4b46a510cf4a03304
     return 0;
 }
