@@ -1,9 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
-int n, k, ok;
-vector<vector<int>> v;
+int n, k, ok, cnt;
 vector<int> a;
-
+vector<string> res;
 void khoiTao(){
     for(int i = 1; i <= n; i++) a[i] = 0;
 }
@@ -17,33 +16,32 @@ void sinh(){
     else{
         a[i] = 1;
     }
-
 }
 int main(){
     cin >> n >> k;
+    bool check = false;
+    a.resize(n+1);
+    khoiTao();
     ok = 1;
-    int dem = 0;
-    v.push_back({1, 2, 3});
     while(ok){
-        int cnt = 0;
-        for(int i = 1; i <= n-2; i++){
-            if(a[i] == 0 && a[i+1] == 0 && a[i+2] == 0){
-                cnt++;
-            }
+        string s = "";
+        for(int i = 1; i <= n; i++){
+            if(a[i] == 0) s += 'A';
+            else s += 'B';
         }
-        if(cnt == 1){
-            dem++;
-            v.push_back(a);
+        string tmp(k, 'A');
+        int pos = s.find(tmp, 0);
+        if(pos != -1){
+            string check = s.substr(pos+1);
+            if(check.find(tmp, 0)){
+                cnt++;
+                res.push_back(s);
+            }
+
         }
         sinh();
     }
-    cout << dem;
-    for(int i = 0; i < v.size(); i++){
-        for(int j = 1; j < v[i].size(); j++){
-            cout << v[i][j] << " ";
-        }
-        cout << endl;
-    }
-
+    cout << cnt << endl;
+    for(int i = 0; i < res.size(); i++) cout << res[i] << endl;
     return 0;
 }

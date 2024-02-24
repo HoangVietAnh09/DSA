@@ -6,26 +6,17 @@ int main(){
     cin.tie(0);
     int n;
     cin >> n;
-    vector<int> a(n), b(n), posc, posl;
+    vector<int> a, b;
     for(int i = 0; i < n; i++){
-        cin >> a[i];
-        if(a[i]%2 == 0){
-            posc.push_back(a[i]);
-            b[i] = 0;
-        }else{
-            posl.push_back(a[i]);
-            b[i] = 1;
-        }
+        int x; cin >> x;
+        if(i%2 == 0) a.push_back(x);
+        else b.push_back(x);
     }
-    sort(posc.begin(), posc.end(), greater<>());
-    sort(posl.begin(), posl.end(), less<>());
-    int cntc = 0, cntl = 0;
-    for(int i = 0; i < n; i++){
-        if(b[i]){
-            cout << posl[cntl++] << " ";
-        }else{
-            cout << posc[cntc++] << " ";
-        }
+    sort(a.begin(), a.end());
+    sort(b.rbegin(), b.rend());
+    for(int i = 0; i < b.size(); i++){
+        cout << a[i] << " " << b[i] << " ";
     }
+    if(n%2 == 1) cout << a.back();
     return 0;
 }
