@@ -13,7 +13,7 @@ int qhd(int a[], int n, int s){
 }
 int main(){
     int n, k, a[10000], f[10000];
-    memset(f, 0, sizeof(int));
+    memset(f, 0, sizeof(f));
     for(int i = 0; i < n; i++) cin >> a[i];
     for(int i = 1; i <= k; i++){
         for(int j = 0; j < n; j++){
