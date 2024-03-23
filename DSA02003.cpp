@@ -1,39 +1,47 @@
 #include <bits/stdc++.h>
 using namespace std;
+bool a[25][25], check;
 int n;
-vector<string> res;
-int a[10004][10004];
-int dx[4] = {-1, 0, 0, 1};
-int dy[4] = {0, -1, 1, 0};
-void backTrack(int i, int j){
-    a[i][j] = 0;
-    for(int k = 0; k < 4; k++){
-        int i1 = i+dx[k];
-        int j1 = j+dy[k];
-        if(i1 >= 0 && i1 < n && j1 >= 0 && j1 <= n){
-            if(a[i1][j1]){
-                backTrack(i1, j1);
-            }
-        }
+string s;
+void backTrack(int i, int j)
+{
+    if(i == n && j == n)
+    {
+        cout << s << ' ';
+        check = 1;
+        return;
+    }
+    if(a[i+1][j])
+    {
+        s += 'D';
+        backTrack(i + 1, j);
+        s.erase(s.length() - 1, 1);
+    }
+    if(a[i][j+1])
+    {
+        s += 'R';
+        backTrack(i, j + 1);
+        s.erase(s.length() - 1, 1);
     }
 }
 int main(){
-    int t;
-    cin >> t;
-    while(t--){
-        cin >> n;
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < n; j++){
-                cin >> a[i][j];
-            }
-        }
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < n; j++){
-                if(a[i][j] == 1){
-                    backTrack(i, j);
-                }
-            }
-        }
-    }
-    return 0;
+	int t;
+	cin >> t;
+	while(t--){
+		cin >> n;
+		check = 0;
+		for(int i = 1; i <= n; i++){
+			for(int j = 1; j <= n; j++){
+				cin >> a[i][j];
+			}
+		}
+		if(!a[1][1]) cout << -1;
+		else{
+			backTrack(1, 1);
+			if(!check) cout << -1;
+		}
+		cout << endl;
+		
+	}
+	return 0;
 }
