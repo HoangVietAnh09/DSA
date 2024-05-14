@@ -1,25 +1,35 @@
 #include <bits/stdc++.h>
 using namespace std;
 char c;
-int k;
+string s;
 int a[1004];
-void in(){
-    for(int i = 1; i <= k; i++){
-        cout << (char)(a[i]+64);
-    }
-    cout << endl;
+bool nguyenAm(char c){
+    if(c != 'A' && c != 'E') return true;
+    return false;
 }
-void backTrack(int i){
-    for(int j = a[i-1]; j <= (int)c-64; j++){
-        a[i] = j;
-        if(i == k) in();
-        else backTrack(i+1);
+void in(){
+    for(int i = 0; i < s.length(); i++){
+        if(s[i] == 'A' || s[i] == 'E'){
+            if(i > 0 && i < s.length()-1 && nguyenAm(s[i-1]) && nguyenAm(s[i+1])) return;
+        }
+    }
+    cout << s << endl;
+}
+void backTrack(char i){
+    for(char j = 'A'; j <= c; j++){
+        if(!a[j]){
+            a[j] = 1;
+            s.push_back(j);
+            if(s.length() == c-'A'+1) in();
+            else backTrack(i+1);
+            a[j] = 0;
+            s.pop_back();
+        }
     }
 }
 int main(){
-    cin >> c >> k;
-    a[0] = 1;
-    backTrack(1);
+    cin >> c;
+    backTrack('A');
 
     return 0;
 }

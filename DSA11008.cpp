@@ -30,6 +30,11 @@ void level(Node *root, int cnt){
         if(root->right != NULL) level(root->right, cnt+1);
     }
 }
+bool check(Node *root, int level, int h){
+    if(root == NULL) return true;
+    if(root->left == NULL && root->right == NULL && level < h) return false;
+    return check(root->left, level+1, h) && check(root->right, level+1, h);
+}
 int main(){
     int t;
     cin >> t;
