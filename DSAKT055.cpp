@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 int dp[1004][1004];
-
 int main(){
 	int t;
 	cin >> t;
@@ -21,6 +20,5 @@ int main(){
 		}
 		cout << dp[n][v] << endl;
 	}
-	
 	return 0;
 }
